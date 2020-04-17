@@ -18,7 +18,7 @@ server.get('/', (_, res) => {
 })
 
 server.post('/login', (req, res) => {
-  const userDB = fs.readFileSync('./db/user.json')
+  const userDB = fs.readFileSync('./fake-db/user.json')
   const userInfo = JSON.parse(userDB)
 
   if (
@@ -38,7 +38,7 @@ server.post('/login', (req, res) => {
 
 server.post('/register', (req, res) => {
   if (req.body) {
-    const dbUserEmail = require('./db/user.json').email
+    const dbUserEmail = require('./fake-db/user.json').email
     if (dbUserEmail === req.body.email) {
       // 409 Conflict
       res.sendStatus(409)
@@ -50,7 +50,7 @@ server.post('/register', (req, res) => {
       }
       const data = JSON.stringify(user, null, 2)
 
-      fs.writeFile('./db/user.json', data, () => {
+      fs.writeFile('./fake-db/user.json', data, () => {
         const token = jwt.sign(user, SECRET_KEY)
         res.json({
           token,

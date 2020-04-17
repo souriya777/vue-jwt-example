@@ -14,4 +14,4 @@ yarn install
 yarn serve
 ```
 
-(it run a node server AND the vue app client)
+(it runs a node server AND the vue app client)
